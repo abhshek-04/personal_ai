@@ -1,0 +1,290 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --chai-dark: #2C1810;
+  --chai-mid: #6B4226;
+  --masala: #C98A3E;
+  --masala-deep: #A96A24;
+  --cream: #F3E9D2;
+  --paper: #FDFBF6;
+  --code-green: #4F7A52;
+  --ink: #241A14;
+  --ink-soft: #5C4B3D;
+  --border: rgba(44, 24, 16, 0.12);
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-lg: 22px;
+  --radius-sm: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  display: flex;
+  justify-content: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ---------- App shell ---------- */
+.app {
+  width: 100%;
+  max-width: 720px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  box-shadow: 0 0 60px rgba(44, 24, 16, 0.08);
+}
+
+@media (min-width: 780px) {
+  .app {
+    height: 92vh;
+    margin-top: 4vh;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+}
+
+/* ---------- Header (the "stall signboard") ---------- */
+.stall-header {
+  background: var(--chai-dark);
+  color: var(--cream);
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.header-text h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.header-text p {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: var(--masala);
+  font-weight: 500;
+}
+
+/* Signature element: a small clay cup with rising steam */
+.cup {
+  position: relative;
+  width: 34px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.cup-body {
+  position: absolute;
+  bottom: 0;
+  left: 3px;
+  width: 28px;
+  height: 20px;
+  background: var(--masala);
+  border-radius: 4px 4px 12px 12px / 4px 4px 16px 16px;
+}
+
+.steam {
+  position: absolute;
+  bottom: 20px;
+  width: 3px;
+  height: 10px;
+  background: var(--cream);
+  opacity: 0.55;
+  border-radius: 2px;
+}
+
+.steam-1 { left: 8px; }
+.steam-2 { left: 15px; animation-delay: 0.4s; }
+.steam-3 { left: 22px; animation-delay: 0.8s; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .steam {
+    animation: rise 2.2s ease-in-out infinite;
+  }
+  @keyframes rise {
+    0%   { transform: translateY(0) scaleY(1); opacity: 0.55; }
+    50%  { transform: translateY(-9px) scaleY(1.3); opacity: 0.15; }
+    100% { transform: translateY(-14px) scaleY(1); opacity: 0; }
+  }
+}
+
+/* ---------- Chat log ---------- */
+.chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-log::-webkit-scrollbar { width: 8px; }
+.chat-log::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+
+.msg {
+  display: flex;
+  gap: 10px;
+  max-width: 84%;
+  animation: settle 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .msg { animation: none; }
+}
+
+@keyframes settle {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.msg-bot { align-self: flex-start; }
+.msg-user { align-self: flex-end; flex-direction: row-reverse; }
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--masala);
+  flex-shrink: 0;
+  margin-top: 2px;
+  background-image: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.5), transparent 60%);
+}
+
+.msg-user .avatar { background: var(--chai-mid); }
+
+.bubble {
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.msg-bot .bubble {
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: var(--radius-sm) var(--radius-lg) var(--radius-lg) var(--radius-lg);
+}
+
+.msg-user .bubble {
+  background: var(--masala);
+  color: #2A1A08;
+  border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg);
+}
+
+.bubble code, .bubble pre {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.bubble pre {
+  background: var(--chai-dark);
+  color: #E8DCC8;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+/* Typing indicator reuses the steam motif */
+.typing .bubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 16px;
+}
+
+.typing .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  opacity: 0.5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .typing .dot {
+    animation: rise 1.2s ease-in-out infinite;
+  }
+  .typing .dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing .dot:nth-child(3) { animation-delay: 0.3s; }
+}
+
+/* ---------- Composer ---------- */
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--paper);
+  flex-shrink: 0;
+}
+
+.composer input {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--ink);
+  padding: 12px 16px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+
+.composer input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+
+.composer input:focus-visible {
+  outline: 2px solid var(--masala-deep);
+  outline-offset: 2px;
+}
+
+.composer button {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: var(--masala);
+  color: var(--chai-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.composer button:hover { background: var(--masala-deep); }
+
+.composer button:focus-visible {
+  outline: 2px solid var(--chai-dark);
+  outline-offset: 2px;
+}
