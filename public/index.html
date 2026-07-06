@@ -21,19 +21,16 @@
     </div>
     <div class="header-text">
       <h1>Chai aur Code</h1>
-      <p>aapka coding tutor · poochiye kuch bhi</p>
+      <p id="headerTagline">aapka coding tutor · poochiye kuch bhi</p>
     </div>
   </header>
 
+  <div class="persona-switch" id="personaSwitch" role="group" aria-label="Choose your tutor">
+    <button type="button" class="persona-btn active" data-persona="hitesh" aria-pressed="true">Hitesh</button>
+    <button type="button" class="persona-btn" data-persona="piyush" aria-pressed="false">Piyush</button>
+  </div>
+
   <main class="chat-log" id="chatLog" role="log" aria-live="polite" aria-label="Conversation">
-
-    <div class="msg msg-bot">
-      <div class="avatar" aria-hidden="true"></div>
-      <div class="bubble">
-        Haan ji, swagat hai! Chai taiyar rakhiye — jo bhi coding sawaal hai, poochiye. Shuru karte hain.
-      </div>
-    </div>
-
   </main>
 
   <form class="composer" id="composerForm">

@@ -131,6 +131,46 @@ body {
   }
 }
 
+/* ---------- Persona switch ---------- */
+.persona-switch {
+  display: flex;
+  gap: 8px;
+  padding: 12px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--paper);
+  flex-shrink: 0;
+}
+
+.persona-btn {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.persona-btn:hover {
+  border-color: var(--masala-deep);
+}
+
+.persona-btn.active {
+  background: var(--masala);
+  color: #2A1A08;
+  border-color: var(--masala-deep);
+  font-weight: 600;
+}
+
+.persona-btn:focus-visible {
+  outline: 2px solid var(--chai-dark);
+  outline-offset: 2px;
+}
+
 /* ---------- Chat log ---------- */
 .chat-log {
   flex: 1;
